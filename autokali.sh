@@ -2,7 +2,9 @@
 
 echo "Kali 2022.4"
 echo "Unzip rockyou"
-sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+if test -f "/usr/share/wordlists/rockyou.txt.gz"; then
+  sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+fi
 
 echo "Install Sublime text"
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
