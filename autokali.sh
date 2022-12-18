@@ -73,7 +73,25 @@ apt install -y neo4j
 wget -O /tmp/bloodhound.zip 'https://github.com/BloodHoundAD/BloodHound/releases/download/4.2.0/BloodHound-linux-x64.zip'
 unzip /tmp/bloodhound.zip -d /opt
 
+# Create Workspaces directory
+mkdir /home/kali/Workspaces
+# Configure rclone
+cat <<EOF > /root/.config/rclone/rclone.conf
+[dropbox]
+type = dropbox
+token = {"access_token":"$1","token_type":"bearer","expiry":"0001-01-01T00:00:00Z"}
+EOF
+# synn /var/www/html
+rclone sync dropbox:/Kali/html /var/www/html
+# sync /home/kali/Workspaces
+rclone sync dropbox:/Kali/Workspaces /home/kali/Workspaces
+# change owner of Workspaces
+chown -R kali:kali /home/kali/Workspaces
+
 echo -e "${Yellow}Manual task"
 echo -e "${Yellow}Run command ${Green}sudo neo4j console ${Yellow}then enter neo4j:neo4j as username:password to setup Neo4j"
 echo -e "${Yellow}Move to /opt/Bloodhound and run ${Green}./Bloodhound --no-sandbox ${Yellow}to run Bloodhound"
 echo -e "${Yellow}Remember to configure samba"
+#w98LYDYn2gQAAAAAAAAAAVlfVHyDVlOVKVL
+#-mmGEiqcdtqugr8fnGrKVORR63a0C
+#
