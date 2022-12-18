@@ -1,6 +1,6 @@
 #! /bin/bash
 
-LGREEN = '\033[1;32m'
+LGREEN='\033[1;32m'
 
 echo -e "${LGREEN}Kali 2022.4"
 echo "${LGREEN}Unzip rockyou"
