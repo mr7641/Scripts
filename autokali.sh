@@ -3,7 +3,7 @@
 LGREEN='\033[1;32m'
 NOCOLOR='\033[0m'
 
-echo -e "${LGREEN}Kali 2022.4"
+echo -e "${LGREEN}Kali 2022.4${NOCOLOR}"
 echo "${LGREEN}Unzip rockyou${NOCOLOR}"
 if test -f "/usr/share/wordlists/rockyou.txt.gz"; then
   sudo gunzip /usr/share/wordlists/rockyou.txt.gz
