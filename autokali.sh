@@ -32,9 +32,6 @@ msfdb init
 apt update
 apt install -y metasploit-framework
 
-echo -e "${Green}Install Rclone${Color_Off}"
-apt install -y rclone
-
 echo -e "${Green}Install Visual Studio Code${Color_Off}"
 wget -O /tmp/vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
 apt install -y /tmp/vscode.deb
@@ -75,6 +72,9 @@ unzip /tmp/bloodhound.zip -d /opt
 
 # Create Workspaces directory
 mkdir /home/kali/Workspaces
+# Install rclone
+echo -e "${Green}Install Rclone${Color_Off}"
+apt install -y rclone
 # Configure rclone
 cat <<EOF > /root/.config/rclone/rclone.conf
 [dropbox]
@@ -92,6 +92,3 @@ echo -e "${Yellow}Manual task"
 echo -e "${Yellow}Run command ${Green}sudo neo4j console ${Yellow}then enter neo4j:neo4j as username:password to setup Neo4j"
 echo -e "${Yellow}Move to /opt/Bloodhound and run ${Green}./Bloodhound --no-sandbox ${Yellow}to run Bloodhound"
 echo -e "${Yellow}Remember to configure samba"
-#w98LYDYn2gQAAAAAAAAAAVlfVHyDVlOVKVL
-#-mmGEiqcdtqugr8fnGrKVORR63a0C
-#
