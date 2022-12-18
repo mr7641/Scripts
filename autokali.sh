@@ -16,53 +16,62 @@ White='\033[0;37m'        # White
 echo -e "${Green}Kali 2022.4${Color_Off}"
 echo -e "${Green}Unzip rockyou${Color_Off}"
 if test -f "/usr/share/wordlists/rockyou.txt.gz"; then
-  sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+  gunzip /usr/share/wordlists/rockyou.txt.gz
 fi
 
 echo -e "${Green}Install Sublime text${Color_Off}"
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-sudo apt update
-sudo apt install -y sublime-text
+apt update
+apt install -y sublime-text
 
 echo -e "${Green}Prepare Metasploit${Color_Off}"
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
-sudo msfdb init
-sudo apt update
-sudo apt install -y metasploit-framework
+systemctl start postgresql
+systemctl enable postgresql
+msfdb init
+apt update
+apt install -y metasploit-framework
 
 echo -e "${Green}Install Rclone${Color_Off}"
-sudo apt install -y rclone
+apt install -y rclone
 
 echo -e "${Green}Install Visual Studio Code${Color_Off}"
 wget -O /tmp/vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
-sudo apt install -y /tmp/vscode.deb
+apt install -y /tmp/vscode.deb
 
 echo -e "${Green}Install golang${Color_Off}"
-sudo apt install -y golang
+apt install -y golang
 
-echo -e "${Green}Install samba${Color_Off}"
-sudo apt install -y samba
+echo -e "${Green}Install and setup samba${Color_Off}"
+apt install -y samba
+cp /etc/samba/smb.conf /etc/samba/smb.conf.old
+cat <<EOF > /etc/samba/smb.conf
+[data]
+path = /home/kali/Workspaces/OSEP/data
+browseable = yes
+read only = no
+EOF
+(echo "kali"; echo "kali") | smbpasswd -s -a kali
+systemctl start smbd nmbd
 
 echo -e "${Green}Install Chisel${Color_Off}"
-cd /opt; sudo git clone https://github.com/jpillora/chisel.git
-cd /opt/chisel; sudo go build; sudo env GOOS=windows GOARCH=amd64 go build -o chisel.exe -ldflags "-s -w"
+cd /opt; git clone https://github.com/jpillora/chisel.git
+cd /opt/chisel; go build; env GOOS=windows GOARCH=amd64 go build -o chisel.exe -ldflags "-s -w"
 
 echo -e "${Green}Clone go shellcode${Color_Off}"
-cd /opt; sudo git clone https://github.com/Ne0nd0g/go-shellcode.git
+cd /opt; git clone https://github.com/Ne0nd0g/go-shellcode.git
 
 echo -e "${Green}Clone dirsearcher${Color_Off}"
-cd /opt; sudo git clone https://github.com/maurosoria/dirsearch.git
+cd /opt; git clone https://github.com/maurosoria/dirsearch.git
 
 echo -e "${Green}Install mono for compiling C# project${Color_Off}"
-sudo apt install -y mono-complete
+apt install -y mono-complete
 
 echo -e "${Green}Install bloodhound${Color_Off}"
-sudo apt install -y apt-transport-https
-sudo apt install -y neo4j
+apt install -y apt-transport-https
+apt install -y neo4j
 wget -O /tmp/bloodhound.zip 'https://github.com/BloodHoundAD/BloodHound/releases/download/4.2.0/BloodHound-linux-x64.zip'
-sudo unzip /tmp/bloodhound.zip -d /opt
+unzip /tmp/bloodhound.zip -d /opt
 
 echo -e "${Yellow}Manual task"
 echo -e "${Yellow}Run command ${Green}sudo neo4j console ${Yellow}then enter neo4j:neo4j as username:password to setup Neo4j"
