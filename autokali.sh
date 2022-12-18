@@ -52,7 +52,7 @@ cd /opt/chisel; sudo go build; sudo env GOOS=windows GOARCH=amd64 go build -o ch
 echo -e "${Green}Clone go shellcode${Color_Off}"
 cd /opt; sudo git clone https://github.com/Ne0nd0g/go-shellcode.git
 
-echo -e "${Green}Clone go dirsearcher${Color_Off}"
+echo -e "${Green}Clone dirsearcher${Color_Off}"
 cd /opt; sudo git clone https://github.com/maurosoria/dirsearch.git
 
 echo -e "${Green}Install mono for compiling C# project${Color_Off}"
