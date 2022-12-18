@@ -47,7 +47,7 @@ sudo apt install -y samba
 
 echo -e "${Green}Install Chisel${Color_Off}"
 cd /opt; sudo git clone https://github.com/jpillora/chisel.git
-cd /opt/chisel; sudo go build; sudo env GOOS=windows GOARCH=amd64 go build -o chisel.exe -ldflags "-s -W"
+cd /opt/chisel; sudo go build; sudo env GOOS=windows GOARCH=amd64 go build -o chisel.exe -ldflags "-s -w"
 
 echo -e "${Green}Clone go shellcode${Color_Off}"
 cd /opt; sudo git clone https://github.com/Ne0nd0g/go-shellcode.git
