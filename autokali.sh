@@ -46,8 +46,8 @@ echo -e "${Green}===Install and setup samba===${Color_Off}"
 apt -qq install -y samba
 cp /etc/samba/smb.conf /etc/samba/smb.conf.old
 cat <<EOF > /etc/samba/smb.conf
-[data]
-path = /home/kali/Workspaces/OSEP/data
+[osep]
+path = /home/kali/Workspaces/OSEP
 browseable = yes
 read only = no
 EOF
