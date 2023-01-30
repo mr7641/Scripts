@@ -94,6 +94,7 @@ EOF
 mkdir /home/kali/Workspaces
 # Create .mozilla directory
 mkdir /home/kali/.mozilla
+# sync from dropbox mr7641
 # sync /var/www/html
 rclone sync dropbox:/Kali/html /var/www/html
 # sync /home/kali/Workspaces
@@ -104,8 +105,13 @@ rclone sync dropbox:/Kali/mozilla /home/kali/.mozilla
 chown -R kali:kali /home/kali/Workspaces
 # change owner of .mozilla
 chown -R kali:kali /home/kali/.mozilla
+# copy and configure impacket script MyDomainRecon.py
+cp /home/kali/Workspaces/OSEP/OSEP-Code/Reconnaissance/MyDomainRecon.py /usr/share/doc/python3-impacket/examples/MyDomainRecon.py
+chmod 755 /usr/share/doc/python3-impacket/examples/MyDomainRecon.py
+ln -s ../share/impacket/script /usr/bin/impacket-MyDomainRecon
 
 echo -e "${Yellow}Manual task"
 echo -e "${Yellow}Run command ${Green}sudo neo4j console ${Yellow}then enter neo4j:neo4j as username:password to setup Neo4j"
 echo -e "${Yellow}Move to /opt/Bloodhound and run ${Green}./Bloodhound --no-sandbox ${Yellow}to run Bloodhound"
+echo -e "${Yellow}Remember to copy custom bloodhound queries from OSEP-Code/Reconnaissance/BloodHound/customqueries.json to /home/kali/.config/bloodhound/customqueries.json"
 echo -e "${Yellow}Remember to configure samba"
