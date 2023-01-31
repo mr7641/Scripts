@@ -96,11 +96,11 @@ mkdir /home/kali/Workspaces
 mkdir /home/kali/.mozilla
 # sync from dropbox mr7641
 # sync /var/www/html
-rclone sync dropbox:/Kali/html /var/www/html
+rclone sync dropbox:/kali/html /var/www/html
 # sync /home/kali/Workspaces
-rclone sync dropbox:/Kali/Workspaces /home/kali/Workspaces
+rclone sync dropbox:/kali/Workspaces /home/kali/Workspaces
 # sync firefox
-rclone sync dropbox:/Kali/mozilla /home/kali/.mozilla
+rclone sync dropbox:/kali/mozilla /home/kali/.mozilla
 # change owner of Workspaces
 chown -R kali:kali /home/kali/Workspaces
 # change owner of .mozilla
