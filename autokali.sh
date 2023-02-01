@@ -68,10 +68,15 @@ echo -e "${Green}===Install mono for compiling C# project===${Color_Off}"
 apt -qq install -y mono-complete
 
 echo -e "${Green}Install bloodhound${Color_Off}"
+# install neo4j
 apt -qq install -y apt-transport-https
 apt -qq install -y neo4j
+# set initial password for neo4j
+/usr/share/neo4j/bin/neo4j-admin set-initial-password 123abc
+# install bloodhound
 wget -qO /tmp/bloodhound.zip 'https://github.com/BloodHoundAD/BloodHound/releases/download/4.2.0/BloodHound-linux-x64.zip'
 unzip -qq /tmp/bloodhound.zip -d /opt
+# configure bloodhound
 
 # Install rclone
 echo -e "${Green}===Install rclone===${Color_Off}"
