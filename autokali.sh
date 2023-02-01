@@ -77,6 +77,79 @@ apt -qq install -y neo4j
 wget -qO /tmp/bloodhound.zip 'https://github.com/BloodHoundAD/BloodHound/releases/download/4.2.0/BloodHound-linux-x64.zip'
 unzip -qq /tmp/bloodhound.zip -d /opt
 # configure bloodhound
+mkdir -p /home/kali/.config/bloodhound
+cat <<EOF > /home/kali/.config/bloodhound/config.json
+{
+	"performance": {
+		"edge": 5,
+		"lowGraphics": false,
+		"nodeLabels": 0,
+		"edgeLabels": 0,
+		"darkMode": true
+	},
+	"edgeincluded": {
+		"MemberOf": true,
+		"HasSession": true,
+		"AdminTo": true,
+		"AllExtendedRights": true,
+		"AddMember": true,
+		"ForceChangePassword": true,
+		"GenericAll": true,
+		"GenericWrite": true,
+		"Owns": true,
+		"WriteDacl": true,
+		"WriteOwner": true,
+		"CanRDP": true,
+		"ExecuteDCOM": true,
+		"AllowedToDelegate": true,
+		"ReadLAPSPassword": true,
+		"Contains": true,
+		"GPLink": true,
+		"AddAllowedToAct": true,
+		"AllowedToAct": true,
+		"SQLAdmin": true,
+		"ReadGMSAPassword": true,
+		"HasSIDHistory": true,
+		"CanPSRemote": true,
+		"SyncLAPSPassword": true,
+		"AZAddMembers": true,
+		"AZAddSecret": true,
+		"AZAvereContributor": true,
+		"AZContains": true,
+		"AZContributor": true,
+		"AZExecuteCommand": true,
+		"AZGetCertificates": true,
+		"AZGetKeys": true,
+		"AZGetSecrets": true,
+		"AZGlobalAdmin": true,
+		"AZGrant": true,
+		"AZGrantSelf": true,
+		"AZHasRole": true,
+		"AZMemberOf": true,
+		"AZOwner": true,
+		"AZOwns": true,
+		"AZPrivilegedRoleAdmin": true,
+		"AZResetPassword": true,
+		"AZUserAccessAdministrator": true,
+		"AZAppAdmin": true,
+		"AZCloudAppAdmin": true,
+		"AZRunsAs": true,
+		"AZKeyVaultContributor": true,
+		"AZVMAdminLogin": true,
+		"AddSelf": true,
+		"WriteSPN": true,
+		"AddKeyCredentialLink": true
+	},
+	"databaseInfo": {
+		"url": "bolt://localhost:7687",
+		"user": "neo4j",
+		"password": "123abc"
+	}
+}
+EOF
+chown -R kali:kali /home/kali/.config/bloodhound
+chmod 700 /home/kali/.config/bloodhound
+chmod 644 /home/kali/.config/bloodhound/config.json
 
 # Install rclone
 echo -e "${Green}===Install rclone===${Color_Off}"
@@ -114,8 +187,7 @@ chown -R kali:kali /home/kali/.mozilla
 cp /home/kali/Workspaces/OSEP/OSEP-Code/Reconnaissance/MyDomainRecon.py /usr/share/doc/python3-impacket/examples/MyDomainRecon.py
 chmod 755 /usr/share/doc/python3-impacket/examples/MyDomainRecon.py
 ln -s ../share/impacket/script /usr/bin/impacket-MyDomainRecon
-
-echo -e "${Yellow}Manual task"
-echo -e "${Yellow}Run command ${Green}sudo neo4j console ${Yellow}then enter neo4j:neo4j as username:password to setup Neo4j"
-echo -e "${Yellow}Move to /opt/Bloodhound and run ${Green}./Bloodhound --no-sandbox ${Yellow}to run Bloodhound"
-echo -e "${Yellow}Remember to copy custom bloodhound queries from OSEP-Code/Reconnaissance/BloodHound/customqueries.json to /home/kali/.config/bloodhound/customqueries.json"
+# copy and config bloodhound custom queries
+cp /home/kali/Workspaces/OSEP/OSEP-Code/Reconnaissance/BloodHound/customqueries.json /home/kali/.config/bloodhound/customqueries.json
+chown kali:kali /home/kali/.config/bloodhound/customqueries.json
+chmod 644 /home/kali/.config/bloodhound/customqueries.json
