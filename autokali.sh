@@ -67,6 +67,9 @@ cd /opt; git clone -q https://github.com/maurosoria/dirsearch.git
 echo -e "${Green}===Install mono for compiling C# project===${Color_Off}"
 apt -qq install -y mono-complete
 
+echo -e "${Green}===Install Kerberos client ===${Color_Off}"
+DEBIAN_FRONTEND=noninteractive apt -qq install -y krb5-user
+
 echo -e "${Green}Install bloodhound${Color_Off}"
 # install neo4j
 apt -qq install -y apt-transport-https
@@ -191,3 +194,7 @@ ln -s ../share/impacket/script /usr/bin/impacket-MyDomainRecon
 cp /home/kali/Workspaces/OSEP/OSEP-Code/Reconnaissance/BloodHound/customqueries.json /home/kali/.config/bloodhound/customqueries.json
 chown kali:kali /home/kali/.config/bloodhound/customqueries.json
 chmod 644 /home/kali/.config/bloodhound/customqueries.json
+# copy configuration file
+cp /home/kali/Workspaces/configfile/krb5.conf /etc/krb5.conf
+cp /home/kali/Workspaces/configfile/hosts /etc/hosts
+cp /home/kali/Workspaces/proxychains4.conf /etc/proxychains4.conf
