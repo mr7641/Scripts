@@ -75,7 +75,7 @@ DEBIAN_FRONTEND=noninteractive apt -qq install -y krb5-user
 #apt -qq install -y seclists
 
 # Create Toys directory
-mkdir /home/kali/Toys
+mkdir -p /home/kali/Toys
 
 echo -e "${Green}===Clone Chisel===${Color_Off}"
 cd /home/kali/Toys; git clone https://github.com/jpillora/chisel.git
@@ -206,11 +206,11 @@ token = {"access_token":"$1","token_type":"bearer","expiry":"0001-01-01T00:00:00
 EOF
 
 # Create Workspaces directory
-mkdir /home/kali/Workspaces
+mkdir -p /home/kali/Workspaces
 # Create Configfiles directory
-mkdir /home/kali/Configfiles
+mkdir -p /home/kali/Configfiles
 # Create .mozilla directory
-mkdir /home/kali/.mozilla
+mkdir -p /home/kali/.mozilla
 
 echo -e "${Green}===Sync data from Dropbox mr7641===${Color_Off}"
 # sync /var/www/html
