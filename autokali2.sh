@@ -51,7 +51,7 @@ echo -e "${Green}===Install golang===${Color_Off}"
 apt -qq install -y golang
 
 echo -e "${Green}===Install python virtualenv===${Color_Off}"
-sudo apt install python3.10-venv
+apt -qq install -y python3.10-venv
 
 echo -e "${Green}===Install and setup samba===${Color_Off}"
 apt -qq install -y samba
